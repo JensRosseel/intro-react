@@ -8,15 +8,18 @@ function App() {
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef();
 
+  // Set initial local storage
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     if (storedTodos) setTodos(storedTodos);
   }, []);
 
+  // Add items to local storage
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
+  // Toggle todos to complete/incomplete
   const toggleTodo = (id) => {
     const newTodos = [...todos];
     const todo = newTodos.find(todo => todo.id === id);
@@ -24,9 +27,10 @@ function App() {
     setTodos(newTodos);
   }
 
+  // Add a todo
   const addTodo = (e) => {
     const name = todoNameRef.current.value;
-    if(name == ''){
+    if(name === ''){
 
     } else {
       setTodos(prevTodos => {
@@ -36,19 +40,21 @@ function App() {
     }
   }
 
+  // Clear all completed todos
   const clearCompleteTodo = () => {
     const newTodos = todos.filter(todo => !todo.complete);
     setTodos(newTodos);
   }
 
+  // output for view
   return (
-    <>
-      <input ref={todoNameRef} type="text" />
-      <button onClick={addTodo} >Add Todo</button>
-      <button onclick={clearCompleteTodo}>Clear Complete</button>
+    <div className="content">
+      <input ref={todoNameRef} type="text" placeholder="What needs to be done?" /><br></br>
+      <button onClick={addTodo}>Add Todo</button>
+      <button onClick={clearCompleteTodo}>Clear Complete</button>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
-      <div>{todos.filter(todo => !todo.complete).length}</div>
-    </>
+      <div className="footer">{todos.filter(todo => !todo.complete).length} items left</div>
+    </div>
   );
 }
 
