@@ -28,11 +28,26 @@ body{
     color: $primary;
 }
 
-input[type=text]{
+.entry{
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+input[type=text], input[type=date]{
     color: $secondary;
     font-size: 22px;
     border: 1px solid $quaternary;
-    width: 99.3%;
+
+}
+
+input[type=date]{
+    font-size: 22px;
+    text-align: center;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
 
 button{
@@ -64,3 +79,9 @@ button{
     border: 1px solid $secondary;
 }
 
+@media only screen and (max-width: 1024px){
+    .container{
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}

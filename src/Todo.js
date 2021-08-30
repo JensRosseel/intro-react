@@ -8,7 +8,7 @@ export default function Todo({ todo, toggleTodo }) {
         <div className="todo">
             <label>
                 <input type="checkbox" checked={todo.complete} onChange={todoClick} />
-                {todo.name}
+                {todo.name} | Deadline: {todo.date}
             </label>
         </div>
     )
